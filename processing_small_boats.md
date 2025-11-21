@@ -75,7 +75,7 @@ data_source <- readODS::read_ods(
 
 Besides the date components (`n_year`, `n_month`, `n_day`, `n_week`, and `date_label`), the datasets will have three more columns:
 
-- Ratio of migrants per boat (`ratio_migrants_per_boat`): All
+- Ratio of migrants per boat (`migrants_per_boat`): All
 - Cumulative number of migrant arrivals (`cumulative_migrants_arrived`): Except `db_yearly_migrants_boats`
 - Cumulative number of small boats arrivals (`cumulative_boats_arrived`): Except `db_yearly_migrants_boats`
 
@@ -102,15 +102,16 @@ db_daily_migrants_boats <- data_source %>%
         condition = migrants_arrived > 0,
         true = migrants_arrived,
         false = NA_real_),
-    ratio_migrants_per_boat = if_else(
+    migrants_per_boat = if_else(
       condition = !is.na(boats_arrived) & !is.na(migrants_arrived),
       true = migrants_arrived / boats_arrived,
       false = NA_real_),
+    migrants_per_boat_round = round(migrants_per_boat, digits = 0),
     n_month = month(full_date),
     label_month = month(full_date, label = TRUE, abbr = FALSE),
     n_day = day(full_date),
     date_label = str_glue("{label_month} {n_day}, {n_year}")) %>%
-  relocate(ratio_migrants_per_boat, .after = boats_arrived) %>%
+  relocate(migrants_per_boat, .after = boats_arrived) %>%
   relocate(n_year, .after = full_date) %>%
   relocate(n_month, .after = n_year) %>%
   relocate(n_day, .after = n_month) %>%
@@ -120,18 +121,18 @@ db_daily_migrants_boats <- data_source %>%
 
 **Daily migrants and small boats arrivals** (last ten rows)
 
-| full_date | date_label | n_year | n_month | n_day | migrants_arrived | boats_arrived | ratio_migrants_per_boat | cumulative_migrants_arrived | cumulative_boats_arrived |
-|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|
-| 2025-11-04 | November 4, 2025 | 2025 | 11 | 4 | NA | NA | NA | 36954 | 603 |
-| 2025-11-05 | November 5, 2025 | 2025 | 11 | 5 | NA | NA | NA | 36954 | 603 |
-| 2025-11-06 | November 6, 2025 | 2025 | 11 | 6 | 621 | 9 | 69.00000 | 37575 | 612 |
-| 2025-11-07 | November 7, 2025 | 2025 | 11 | 7 | 648 | 9 | 72.00000 | 38223 | 621 |
-| 2025-11-08 | November 8, 2025 | 2025 | 11 | 8 | 503 | 7 | 71.85714 | 38726 | 628 |
-| 2025-11-09 | November 9, 2025 | 2025 | 11 | 9 | 349 | 5 | 69.80000 | 39075 | 633 |
-| 2025-11-10 | November 10, 2025 | 2025 | 11 | 10 | NA | NA | NA | 39075 | 633 |
-| 2025-11-11 | November 11, 2025 | 2025 | 11 | 11 | NA | NA | NA | 39075 | 633 |
-| 2025-11-12 | November 12, 2025 | 2025 | 11 | 12 | NA | NA | NA | 39075 | 633 |
-| 2025-11-13 | November 13, 2025 | 2025 | 11 | 13 | NA | NA | NA | 39075 | 633 |
+| full_date | date_label | n_year | n_month | n_day | migrants_arrived | boats_arrived | migrants_per_boat | cumulative_migrants_arrived | cumulative_boats_arrived | migrants_per_boat_round |
+|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2025-11-04 | November 4, 2025 | 2025 | 11 | 4 | NA | NA | NA | 36954 | 603 | NA |
+| 2025-11-05 | November 5, 2025 | 2025 | 11 | 5 | NA | NA | NA | 36954 | 603 | NA |
+| 2025-11-06 | November 6, 2025 | 2025 | 11 | 6 | 621 | 9 | 69.00000 | 37575 | 612 | 69 |
+| 2025-11-07 | November 7, 2025 | 2025 | 11 | 7 | 648 | 9 | 72.00000 | 38223 | 621 | 72 |
+| 2025-11-08 | November 8, 2025 | 2025 | 11 | 8 | 503 | 7 | 71.85714 | 38726 | 628 | 72 |
+| 2025-11-09 | November 9, 2025 | 2025 | 11 | 9 | 349 | 5 | 69.80000 | 39075 | 633 | 70 |
+| 2025-11-10 | November 10, 2025 | 2025 | 11 | 10 | NA | NA | NA | 39075 | 633 | NA |
+| 2025-11-11 | November 11, 2025 | 2025 | 11 | 11 | NA | NA | NA | 39075 | 633 | NA |
+| 2025-11-12 | November 12, 2025 | 2025 | 11 | 12 | NA | NA | NA | 39075 | 633 | NA |
+| 2025-11-13 | November 13, 2025 | 2025 | 11 | 13 | NA | NA | NA | 39075 | 633 | NA |
 
 ### Weekly migrant and boat arrivals
 
@@ -187,21 +188,22 @@ db_weekly_migrants_boats <- db_daily_migrants_boats %>%
     migrants_per_boat = if_else(
       condition = !is.na(boats_arrived) & !is.na(migrants_arrived),
       true = migrants_arrived / boats_arrived,
-      false = NA_real_))
+      false = NA_real_),
+    migrants_per_boat_round = round(migrants_per_boat, digits = 0))
 ```
 
-| n_year | n_week | migrants_arrived | boats_arrived | cumulative_migrants_arrived | cumulative_boats_arrived | migrants_per_boat |
-|---:|---:|---:|---:|---:|---:|---:|
-| 2025 | 37 | 188 | 3 | 31031 | 518 | 62.66667 |
-| 2025 | 38 | 1157 | 14 | 32188 | 532 | 82.64286 |
-| 2025 | 39 | 1899 | 27 | 34087 | 559 | 70.33333 |
-| 2025 | 40 | 314 | 6 | 34401 | 565 | 52.33333 |
-| 2025 | 41 | 1964 | 28 | 36365 | 593 | 70.14286 |
-| 2025 | 42 | 369 | 7 | 36734 | 600 | 52.71429 |
-| 2025 | 43 | 220 | 3 | 36954 | 603 | 73.33333 |
-| 2025 | 44 | NA | NA | 36954 | 603 | NA |
-| 2025 | 45 | 2121 | 30 | 39075 | 633 | 70.70000 |
-| 2025 | 46 | NA | NA | 39075 | 633 | NA |
+| n_year | n_week | migrants_arrived | boats_arrived | cumulative_migrants_arrived | cumulative_boats_arrived | migrants_per_boat | migrants_per_boat_round |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2025 | 37 | 188 | 3 | 31031 | 518 | 62.66667 | 63 |
+| 2025 | 38 | 1157 | 14 | 32188 | 532 | 82.64286 | 83 |
+| 2025 | 39 | 1899 | 27 | 34087 | 559 | 70.33333 | 70 |
+| 2025 | 40 | 314 | 6 | 34401 | 565 | 52.33333 | 52 |
+| 2025 | 41 | 1964 | 28 | 36365 | 593 | 70.14286 | 70 |
+| 2025 | 42 | 369 | 7 | 36734 | 600 | 52.71429 | 53 |
+| 2025 | 43 | 220 | 3 | 36954 | 603 | 73.33333 | 73 |
+| 2025 | 44 | NA | NA | 36954 | 603 | NA | NA |
+| 2025 | 45 | 2121 | 30 | 39075 | 633 | 70.70000 | 71 |
+| 2025 | 46 | NA | NA | 39075 | 633 | NA | NA |
 
 ### Monthly migrant and boat arrivals
 
@@ -236,6 +238,7 @@ db_monthly_migrants_boats <- db_daily_migrants_boats %>%
       condition = !is.na(boats_arrived) & !is.na(migrants_arrived),
       true = migrants_arrived / boats_arrived,
       false = NA_real_),
+    migrants_per_boat_round = round(migrants_per_boat, digits = 0),
     n_month = month(date_month),
     date_label = format(x = date_month, format = "%B %Y")) %>%
   relocate(migrants_per_boat, .after = boats_arrived) %>%
@@ -244,18 +247,18 @@ db_monthly_migrants_boats <- db_daily_migrants_boats %>%
   relocate(date_label, .after = date_month)
 ```
 
-| date_month | date_label | n_year | n_month | migrants_arrived | boats_arrived | migrants_per_boat | cumulative_migrants_arrived | cumulative_boats_arrived |
-|:---|:---|---:|---:|---:|---:|---:|---:|---:|
-| 2025-02-01 | February 2025 | 2025 | 2 | 958 | 19 | 50.42105 | 2056 | 39 |
-| 2025-03-01 | March 2025 | 2025 | 3 | 4586 | 80 | 57.32500 | 6642 | 119 |
-| 2025-04-01 | April 2025 | 2025 | 4 | 4432 | 80 | 55.40000 | 11074 | 199 |
-| 2025-05-01 | May 2025 | 2025 | 5 | 3738 | 64 | 58.40625 | 14812 | 263 |
-| 2025-06-01 | June 2025 | 2025 | 6 | 5170 | 80 | 64.62500 | 19982 | 343 |
-| 2025-07-01 | July 2025 | 2025 | 7 | 5454 | 88 | 61.97727 | 25436 | 431 |
-| 2025-08-01 | August 2025 | 2025 | 8 | 3567 | 56 | 63.69643 | 29003 | 487 |
-| 2025-09-01 | September 2025 | 2025 | 9 | 5084 | 72 | 70.61111 | 34087 | 559 |
-| 2025-10-01 | October 2025 | 2025 | 10 | 2867 | 44 | 65.15909 | 36954 | 603 |
-| 2025-11-01 | November 2025 | 2025 | 11 | 2121 | 30 | 70.70000 | 39075 | 633 |
+| date_month | date_label | n_year | n_month | migrants_arrived | boats_arrived | migrants_per_boat | cumulative_migrants_arrived | cumulative_boats_arrived | migrants_per_boat_round |
+|:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|
+| 2025-02-01 | February 2025 | 2025 | 2 | 958 | 19 | 50.42105 | 2056 | 39 | 50 |
+| 2025-03-01 | March 2025 | 2025 | 3 | 4586 | 80 | 57.32500 | 6642 | 119 | 57 |
+| 2025-04-01 | April 2025 | 2025 | 4 | 4432 | 80 | 55.40000 | 11074 | 199 | 55 |
+| 2025-05-01 | May 2025 | 2025 | 5 | 3738 | 64 | 58.40625 | 14812 | 263 | 58 |
+| 2025-06-01 | June 2025 | 2025 | 6 | 5170 | 80 | 64.62500 | 19982 | 343 | 65 |
+| 2025-07-01 | July 2025 | 2025 | 7 | 5454 | 88 | 61.97727 | 25436 | 431 | 62 |
+| 2025-08-01 | August 2025 | 2025 | 8 | 3567 | 56 | 63.69643 | 29003 | 487 | 64 |
+| 2025-09-01 | September 2025 | 2025 | 9 | 5084 | 72 | 70.61111 | 34087 | 559 | 71 |
+| 2025-10-01 | October 2025 | 2025 | 10 | 2867 | 44 | 65.15909 | 36954 | 603 | 65 |
+| 2025-11-01 | November 2025 | 2025 | 11 | 2121 | 30 | 70.70000 | 39075 | 633 | 71 |
 
 ### Yearly migrant and boat arrivals
 
@@ -269,19 +272,21 @@ db_yearly_migrants_boats <- db_daily_migrants_boats %>%
       .fns = list("sum" = \(x) sum(x, na.rm = TRUE)),
       .names = "{.col}")) %>%
   ungroup() %>%
-  mutate(migrants_per_boat = migrants_arrived / boats_arrived)
+  mutate(
+    migrants_per_boat = migrants_arrived / boats_arrived,
+    migrants_per_boat_round = round(migrants_per_boat, digits = 0))
 ```
 
-| n_year | migrants_arrived | boats_arrived | migrants_per_boat |
-|-------:|-----------------:|--------------:|------------------:|
-|   2018 |              299 |            43 |          6.953488 |
-|   2019 |             1843 |           164 |         11.237805 |
-|   2020 |             8462 |           641 |         13.201248 |
-|   2021 |            28526 |          1034 |         27.588008 |
-|   2022 |            45755 |          1110 |         41.220721 |
-|   2023 |            29437 |           602 |         48.898671 |
-|   2024 |            36816 |           695 |         52.972662 |
-|   2025 |            39075 |           633 |         61.729858 |
+| n_year | migrants_arrived | boats_arrived | migrants_per_boat | migrants_per_boat_round |
+|---:|---:|---:|---:|---:|
+| 2018 | 299 | 43 | 6.953488 | 7 |
+| 2019 | 1843 | 164 | 11.237805 | 11 |
+| 2020 | 8462 | 641 | 13.201248 | 13 |
+| 2021 | 28526 | 1034 | 27.588008 | 28 |
+| 2022 | 45755 | 1110 | 41.220721 | 41 |
+| 2023 | 29437 | 602 | 48.898671 | 49 |
+| 2024 | 36816 | 695 | 52.972662 | 53 |
+| 2025 | 39075 | 633 | 61.729858 | 62 |
 
 ## Wide format
 

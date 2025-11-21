@@ -96,7 +96,7 @@ slice_tail(data_source, n = 10)
 #' Besides the date components (`n_year`, `n_month`, `n_day`, `n_week`, and 
 #' `date_label`), the datasets will have three more columns:
 #' 
-#' - Ratio of migrants per boat (`ratio_migrants_per_boat`): All
+#' - Ratio of migrants per boat (`migrants_per_boat`): All
 #' - Cumulative number of migrant arrivals (`cumulative_migrants_arrived`): Except `db_yearly_migrants_boats`
 #' - Cumulative number of small boats arrivals (`cumulative_boats_arrived`): Except `db_yearly_migrants_boats`
 #' 
@@ -123,15 +123,16 @@ db_daily_migrants_boats <- data_source %>%
         condition = migrants_arrived > 0,
         true = migrants_arrived,
         false = NA_real_),
-    ratio_migrants_per_boat = if_else(
+    migrants_per_boat = if_else(
       condition = !is.na(boats_arrived) & !is.na(migrants_arrived),
       true = migrants_arrived / boats_arrived,
       false = NA_real_),
+    migrants_per_boat_round = round(migrants_per_boat, digits = 0),
     n_month = month(full_date),
     label_month = month(full_date, label = TRUE, abbr = FALSE),
     n_day = day(full_date),
     date_label = str_glue("{label_month} {n_day}, {n_year}")) %>%
-  relocate(ratio_migrants_per_boat, .after = boats_arrived) %>%
+  relocate(migrants_per_boat, .after = boats_arrived) %>%
   relocate(n_year, .after = full_date) %>%
   relocate(n_month, .after = n_year) %>%
   relocate(n_day, .after = n_month) %>%
@@ -203,7 +204,8 @@ db_weekly_migrants_boats <- db_daily_migrants_boats %>%
     migrants_per_boat = if_else(
       condition = !is.na(boats_arrived) & !is.na(migrants_arrived),
       true = migrants_arrived / boats_arrived,
-      false = NA_real_))
+      false = NA_real_),
+    migrants_per_boat_round = round(migrants_per_boat, digits = 0))
 
 #' 
 
@@ -244,6 +246,7 @@ db_monthly_migrants_boats <- db_daily_migrants_boats %>%
       condition = !is.na(boats_arrived) & !is.na(migrants_arrived),
       true = migrants_arrived / boats_arrived,
       false = NA_real_),
+    migrants_per_boat_round = round(migrants_per_boat, digits = 0),
     n_month = month(date_month),
     date_label = format(x = date_month, format = "%B %Y")) %>%
   relocate(migrants_per_boat, .after = boats_arrived) %>%
@@ -269,7 +272,9 @@ db_yearly_migrants_boats <- db_daily_migrants_boats %>%
       .fns = list("sum" = \(x) sum(x, na.rm = TRUE)),
       .names = "{.col}")) %>%
   ungroup() %>%
-  mutate(migrants_per_boat = migrants_arrived / boats_arrived)
+  mutate(
+    migrants_per_boat = migrants_arrived / boats_arrived,
+    migrants_per_boat_round = round(migrants_per_boat, digits = 0))
 
 #' 
 
