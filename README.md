@@ -8,6 +8,8 @@ This repository serves as an open access to the data, including additional stati
 
 For any questions about the data, please contact migrationstatsenquiries@homeoffice.gov.uk; and for any questions on the processing or code, raise an issue or contact datavis@thenationalnews.com
 
+[The code is available here](https://github.com/thenationalnews-datavis/uk_small_boats/blob/main/processing_small_boats.md)
+
 > [!NOTE]
 >
 > The data published here is provisional and subject to change, including reduction. Finalised data on small boat crossings since 2018 is published in the quarterly Immigration system statistics under the topic "How many people come to the UK irregularly".
