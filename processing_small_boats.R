@@ -358,6 +358,6 @@ write_csv(
   na = "")
 
 write_csv(
-  x = wide_weekly_cumulative_migrants,
+  x = wide_monthly_cumulative_migrants,
   file = here::here(path2output_data, "wide_uk_small_boats_monthly_cumulative_migrants.csv"),
   na = "")
