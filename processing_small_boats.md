@@ -1,6 +1,6 @@
 # Data processing: Small boat activity in the English Channel
 
-December 12, 2025
+December 19, 2025
 
 by [Isaac Arroyo](https://github.com/isaacarroyov), Data Visualisation Journalist
 
@@ -56,16 +56,16 @@ data_source <- readODS::read_ods(
 
 | full_date | migrants_arrived | boats_arrived | boats_arrived_involved_in_uncontrolled_landings | notes |
 |:---|---:|---:|:---|:---|
-| 2025-12-02 | 0 | 0 | 0 | NA |
-| 2025-12-03 | 0 | 0 | 0 | NA |
-| 2025-12-04 | 0 | 0 | 0 | NA |
-| 2025-12-05 | 0 | 0 | 0 | NA |
-| 2025-12-06 | 0 | 0 | 0 | NA |
-| 2025-12-07 | 0 | 0 | 0 | NA |
-| 2025-12-08 | 0 | 0 | 0 | NA |
 | 2025-12-09 | 0 | 0 | 0 | NA |
 | 2025-12-10 | 0 | 0 | 0 | NA |
 | 2025-12-11 | 0 | 0 | 0 | NA |
+| 2025-12-12 | 0 | 0 | 0 | NA |
+| 2025-12-13 | 737 | 11 | 0 | NA |
+| 2025-12-14 | 52 | 1 | 0 | NA |
+| 2025-12-15 | 0 | 0 | 0 | NA |
+| 2025-12-16 | 74 | 1 | 0 | NA |
+| 2025-12-17 | 497 | 9 | 0 | NA |
+| 2025-12-18 | 0 | 0 | 0 | NA |
 
 > \[!NOTE\]
 >
@@ -123,16 +123,16 @@ db_daily_migrants_boats <- data_source %>%
 
 | full_date | date_label | n_year | n_month | n_day | migrants_arrived | boats_arrived | migrants_per_boat | cumulative_migrants_arrived | cumulative_boats_arrived | migrants_per_boat_round |
 |:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 2025-12-02 | December 2, 2025 | 2025 | 12 | 2 | NA | NA | NA | 39292 | 636 | NA |
-| 2025-12-03 | December 3, 2025 | 2025 | 12 | 3 | NA | NA | NA | 39292 | 636 | NA |
-| 2025-12-04 | December 4, 2025 | 2025 | 12 | 4 | NA | NA | NA | 39292 | 636 | NA |
-| 2025-12-05 | December 5, 2025 | 2025 | 12 | 5 | NA | NA | NA | 39292 | 636 | NA |
-| 2025-12-06 | December 6, 2025 | 2025 | 12 | 6 | NA | NA | NA | 39292 | 636 | NA |
-| 2025-12-07 | December 7, 2025 | 2025 | 12 | 7 | NA | NA | NA | 39292 | 636 | NA |
-| 2025-12-08 | December 8, 2025 | 2025 | 12 | 8 | NA | NA | NA | 39292 | 636 | NA |
 | 2025-12-09 | December 9, 2025 | 2025 | 12 | 9 | NA | NA | NA | 39292 | 636 | NA |
 | 2025-12-10 | December 10, 2025 | 2025 | 12 | 10 | NA | NA | NA | 39292 | 636 | NA |
 | 2025-12-11 | December 11, 2025 | 2025 | 12 | 11 | NA | NA | NA | 39292 | 636 | NA |
+| 2025-12-12 | December 12, 2025 | 2025 | 12 | 12 | NA | NA | NA | 39292 | 636 | NA |
+| 2025-12-13 | December 13, 2025 | 2025 | 12 | 13 | 737 | 11 | 67.00000 | 40029 | 647 | 67 |
+| 2025-12-14 | December 14, 2025 | 2025 | 12 | 14 | 52 | 1 | 52.00000 | 40081 | 648 | 52 |
+| 2025-12-15 | December 15, 2025 | 2025 | 12 | 15 | NA | NA | NA | 40081 | 648 | NA |
+| 2025-12-16 | December 16, 2025 | 2025 | 12 | 16 | 74 | 1 | 74.00000 | 40155 | 649 | 74 |
+| 2025-12-17 | December 17, 2025 | 2025 | 12 | 17 | 497 | 9 | 55.22222 | 40652 | 658 | 55 |
+| 2025-12-18 | December 18, 2025 | 2025 | 12 | 18 | NA | NA | NA | 40652 | 658 | NA |
 
 ### Weekly migrant and boat arrivals
 
@@ -194,7 +194,6 @@ db_weekly_migrants_boats <- db_daily_migrants_boats %>%
 
 | n_year | n_week | migrants_arrived | boats_arrived | cumulative_migrants_arrived | cumulative_boats_arrived | migrants_per_boat | migrants_per_boat_round |
 |---:|---:|---:|---:|---:|---:|---:|---:|
-| 2025 | 41 | 1964 | 28 | 36365 | 593 | 70.14286 | 70 |
 | 2025 | 42 | 369 | 7 | 36734 | 600 | 52.71429 | 53 |
 | 2025 | 43 | 220 | 3 | 36954 | 603 | 73.33333 | 73 |
 | 2025 | 44 | NA | NA | 36954 | 603 | NA | NA |
@@ -203,7 +202,8 @@ db_weekly_migrants_boats <- db_daily_migrants_boats %>%
 | 2025 | 47 | NA | NA | 39292 | 636 | NA | NA |
 | 2025 | 48 | NA | NA | 39292 | 636 | NA | NA |
 | 2025 | 49 | NA | NA | 39292 | 636 | NA | NA |
-| 2025 | 50 | NA | NA | 39292 | 636 | NA | NA |
+| 2025 | 50 | 863 | 13 | 40155 | 649 | 66.38462 | 66 |
+| 2025 | 51 | 497 | 9 | 40652 | 658 | 55.22222 | 55 |
 
 ### Monthly migrant and boat arrivals
 
@@ -258,7 +258,7 @@ db_monthly_migrants_boats <- db_daily_migrants_boats %>%
 | 2025-09-01 | September 2025 | 2025 | 9 | 5084 | 72 | 70.61111 | 34087 | 559 | 71 |
 | 2025-10-01 | October 2025 | 2025 | 10 | 2867 | 44 | 65.15909 | 36954 | 603 | 65 |
 | 2025-11-01 | November 2025 | 2025 | 11 | 2338 | 33 | 70.84848 | 39292 | 636 | 71 |
-| 2025-12-01 | December 2025 | 2025 | 12 | NA | NA | NA | 39292 | 636 | NA |
+| 2025-12-01 | December 2025 | 2025 | 12 | 1360 | 22 | 61.81818 | 40652 | 658 | 62 |
 
 ### Yearly migrant and boat arrivals
 
@@ -286,7 +286,7 @@ db_yearly_migrants_boats <- db_daily_migrants_boats %>%
 | 2022 | 45755 | 1110 | 41.220721 | 41 |
 | 2023 | 29437 | 602 | 48.898671 | 49 |
 | 2024 | 36816 | 695 | 52.972662 | 53 |
-| 2025 | 39292 | 636 | 61.779874 | 62 |
+| 2025 | 40652 | 658 | 61.781155 | 62 |
 
 ## Wide format
 
@@ -302,7 +302,6 @@ wide_weekly_cumulative_migrants <- db_weekly_migrants_boats %>%
 
 | n_week | 2018 | 2019 | 2020 |  2021 |  2022 |  2023 |  2024 |  2025 |
 |-------:|-----:|-----:|-----:|------:|------:|------:|------:|------:|
-|     41 |   28 | 1376 | 7076 | 18768 | 37027 | 25931 | 27225 | 36365 |
 |     42 |   45 | 1389 | 7459 | 19574 | 37603 | 26116 | 28204 | 36734 |
 |     43 |   51 | 1414 | 7492 | 19785 | 38435 | 26605 | 29867 | 36954 |
 |     44 |   66 | 1414 | 7492 | 21094 | 39929 | 26699 | 31094 | 36954 |
@@ -311,7 +310,8 @@ wide_weekly_cumulative_migrants <- db_weekly_migrants_boats %>%
 |     47 |  152 | 1565 | 8113 | 26756 | 42234 | 27708 | 33562 | 39292 |
 |     48 |  161 | 1565 | 8253 | 26756 | 44174 | 28972 | 33684 | 39292 |
 |     49 |  167 | 1671 | 8363 | 26856 | 44264 | 29090 | 33973 | 39292 |
-|     50 |  198 | 1671 | 8407 | 27451 | 45296 | 29437 | 35040 | 39292 |
+|     50 |  198 | 1671 | 8407 | 27451 | 45296 | 29437 | 35040 | 40155 |
+|     51 |  198 | 1740 | 8407 | 28423 | 45665 | 29437 | 35040 | 40652 |
 
 **Monhtly cumulative migrant arrivals**
 
@@ -341,7 +341,7 @@ wide_monthly_cumulative_migrants <- db_monthly_migrants_boats %>%
 | Sep         | September  |   28 | 1339 | 7020 | 17084 | 33029 | 24830 | 25244 | 34087 |
 | Oct         | October    |   51 | 1414 | 7492 | 19785 | 39929 | 26699 | 30661 | 36954 |
 | Nov         | November   |  161 | 1565 | 8253 | 26756 | 44011 | 28360 | 33562 | 39292 |
-| Dec         | December   |  299 | 1843 | 8462 | 28526 | 45755 | 29437 | 36816 | 39292 |
+| Dec         | December   |  299 | 1843 | 8462 | 28526 | 45755 | 29437 | 36816 | 40652 |
 
 ## Save data
 
