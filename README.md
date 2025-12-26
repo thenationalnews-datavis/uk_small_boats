@@ -8,7 +8,7 @@ This repository serves as an open access to the data, including additional stati
 
 For any questions about the data, please contact migrationstatsenquiries@homeoffice.gov.uk; and for any questions on the processing or code, raise an issue or contact datavis@thenationalnews.com
 
-[The code is available here](https://github.com/thenationalnews-datavis/uk_small_boats/blob/main/processing_small_boats.md)
+[The code is available here](https://github.com/thenationalnews-datavis/uk_small_boats/blob/main/processing/processing.md)
 
 > [!NOTE]
 >
