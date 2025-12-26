@@ -6,9 +6,8 @@
 #' format:
 #'   gfm:
 #'     html-math-method: katex
-#'     fig-width: 5
-#'     fig-asp: 0.75
-#'     fig-dpi: 300
+#'     fig-width: 15
+#'     fig-asp: 1
 #'     code-annotations: below
 #'     df-print: kable
 #'     wrap: none
@@ -21,9 +20,9 @@
 #' by [Isaac Arroyo](https://github.com/isaacarroyov), Data Visualisation Journalist
 
 #| label: load-libraries-paths
-here::i_am("processing_small_boats.R")
+here::i_am("processing/processing.R")
+
 library(tidyverse)
-# install.packages("readODS")
 
 path2repo <- here::here()
 path2input_data <- here::here("input_data")
