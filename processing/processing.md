@@ -1,6 +1,6 @@
 # Data processing: Small boat activity in the English Channel
 
-January 10, 2026
+January 16, 2026
 
 by [Isaac Arroyo](https://github.com/isaacarroyov), Data Visualisation Journalist
 
@@ -56,16 +56,16 @@ data_source <- readODS::read_ods(
 
 | full_date | migrants_arrived | boats_arrived | boats_arrived_involved_in_uncontrolled_landings | notes |
 |:---|---:|---:|:---|:---|
-| 2025-12-30 | 0 | 0 | 0 | NA |
-| 2025-12-31 | 0 | 0 | 0 | NA |
-| 2026-01-01 | 0 | 0 | 0 | NA |
-| 2026-01-02 | 0 | 0 | 0 | NA |
-| 2026-01-03 | 0 | 0 | 0 | NA |
-| 2026-01-04 | 0 | 0 | 0 | NA |
-| 2026-01-05 | 32 | 1 | 0 | NA |
 | 2026-01-06 | 0 | 0 | 0 | NA |
 | 2026-01-07 | 0 | 0 | 0 | NA |
 | 2026-01-08 | 0 | 0 | 0 | NA |
+| 2026-01-09 | 0 | 0 | 0 | NA |
+| 2026-01-10 | 0 | 0 | 0 | NA |
+| 2026-01-11 | 0 | 0 | 0 | NA |
+| 2026-01-12 | 0 | 0 | 0 | NA |
+| 2026-01-13 | 0 | 0 | 0 | NA |
+| 2026-01-14 | 171 | 3 | 0 | NA |
+| 2026-01-15 | 0 | 0 | 0 | NA |
 
 > \[!NOTE\]
 >
@@ -123,16 +123,16 @@ db_daily_migrants_boats <- data_source %>%
 
 | full_date | date_label | n_year | n_month | n_day | migrants_arrived | boats_arrived | migrants_per_boat | cumulative_migrants_arrived | cumulative_boats_arrived | migrants_per_boat_round |
 |:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 2025-12-30 | December 30, 2025 | 2025 | 12 | 30 | NA | NA | NA | 41472 | 672 | NA |
-| 2025-12-31 | December 31, 2025 | 2025 | 12 | 31 | NA | NA | NA | 41472 | 672 | NA |
-| 2026-01-01 | January 1, 2026 | 2026 | 1 | 1 | NA | NA | NA | 0 | 0 | NA |
-| 2026-01-02 | January 2, 2026 | 2026 | 1 | 2 | NA | NA | NA | 0 | 0 | NA |
-| 2026-01-03 | January 3, 2026 | 2026 | 1 | 3 | NA | NA | NA | 0 | 0 | NA |
-| 2026-01-04 | January 4, 2026 | 2026 | 1 | 4 | NA | NA | NA | 0 | 0 | NA |
-| 2026-01-05 | January 5, 2026 | 2026 | 1 | 5 | 32 | 1 | 32 | 32 | 1 | 32 |
 | 2026-01-06 | January 6, 2026 | 2026 | 1 | 6 | NA | NA | NA | 32 | 1 | NA |
 | 2026-01-07 | January 7, 2026 | 2026 | 1 | 7 | NA | NA | NA | 32 | 1 | NA |
 | 2026-01-08 | January 8, 2026 | 2026 | 1 | 8 | NA | NA | NA | 32 | 1 | NA |
+| 2026-01-09 | January 9, 2026 | 2026 | 1 | 9 | NA | NA | NA | 32 | 1 | NA |
+| 2026-01-10 | January 10, 2026 | 2026 | 1 | 10 | NA | NA | NA | 32 | 1 | NA |
+| 2026-01-11 | January 11, 2026 | 2026 | 1 | 11 | NA | NA | NA | 32 | 1 | NA |
+| 2026-01-12 | January 12, 2026 | 2026 | 1 | 12 | NA | NA | NA | 32 | 1 | NA |
+| 2026-01-13 | January 13, 2026 | 2026 | 1 | 13 | NA | NA | NA | 32 | 1 | NA |
+| 2026-01-14 | January 14, 2026 | 2026 | 1 | 14 | 171 | 3 | 57 | 203 | 4 | 57 |
+| 2026-01-15 | January 15, 2026 | 2026 | 1 | 15 | NA | NA | NA | 203 | 4 | NA |
 
 ### Weekly migrant and boat arrivals
 
@@ -194,7 +194,6 @@ db_weekly_migrants_boats <- db_daily_migrants_boats %>%
 
 | n_year | n_week | migrants_arrived | boats_arrived | cumulative_migrants_arrived | cumulative_boats_arrived | migrants_per_boat | migrants_per_boat_round |
 |---:|---:|---:|---:|---:|---:|---:|---:|
-| 2025 | 45 | 2121 | 30 | 39075 | 633 | 70.70000 | 71 |
 | 2025 | 46 | 217 | 3 | 39292 | 636 | 72.33333 | 72 |
 | 2025 | 47 | NA | NA | 39292 | 636 | NA | NA |
 | 2025 | 48 | NA | NA | 39292 | 636 | NA | NA |
@@ -203,7 +202,8 @@ db_weekly_migrants_boats <- db_daily_migrants_boats %>%
 | 2025 | 51 | 1317 | 23 | 41472 | 672 | 57.26087 | 57 |
 | 2025 | 52 | NA | NA | 41472 | 672 | NA | NA |
 | 2026 | 1 | 32 | 1 | 32 | 1 | 32.00000 | 32 |
-| 2026 | 2 | NA | NA | 32 | 1 | NA | NA |
+| 2026 | 2 | 171 | 3 | 203 | 4 | 57.00000 | 57 |
+| 2026 | 3 | NA | NA | 203 | 4 | NA | NA |
 
 ### Monthly migrant and boat arrivals
 
@@ -258,7 +258,7 @@ db_monthly_migrants_boats <- db_daily_migrants_boats %>%
 | 2025-10-01 | October 2025 | 2025 | 10 | 2867 | 44 | 65.15909 | 36954 | 603 | 65 |
 | 2025-11-01 | November 2025 | 2025 | 11 | 2338 | 33 | 70.84848 | 39292 | 636 | 71 |
 | 2025-12-01 | December 2025 | 2025 | 12 | 2180 | 36 | 60.55556 | 41472 | 672 | 61 |
-| 2026-01-01 | January 2026 | 2026 | 1 | 32 | 1 | 32.00000 | 32 | 1 | 32 |
+| 2026-01-01 | January 2026 | 2026 | 1 | 203 | 4 | 50.75000 | 203 | 4 | 51 |
 
 ### Yearly migrant and boat arrivals
 
@@ -287,7 +287,7 @@ db_yearly_migrants_boats <- db_daily_migrants_boats %>%
 | 2023 | 29437 | 602 | 48.898671 | 49 |
 | 2024 | 36816 | 695 | 52.972662 | 53 |
 | 2025 | 41472 | 672 | 61.714286 | 62 |
-| 2026 | 32 | 1 | 32.000000 | 32 |
+| 2026 | 203 | 4 | 50.750000 | 51 |
 
 ## Wide format
 
@@ -304,7 +304,8 @@ wide_weekly_cumulative_migrants <- db_weekly_migrants_boats %>%
 | n_week | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 |-------:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
 |      1 |    0 |    8 |    0 |   10 |   66 |   44 |    0 |   61 |   32 |
-|      2 |    0 |    8 |    0 |  171 |  574 |   44 |  263 |  388 |   32 |
+|      2 |    0 |    8 |    0 |  171 |  574 |   44 |  263 |  388 |  203 |
+|      3 |    0 |   45 |   21 |  207 |  963 |  280 |  621 | 1019 |  203 |
 
 **Monhtly cumulative migrant arrivals**
 
@@ -325,7 +326,7 @@ wide_monthly_cumulative_migrants <- db_monthly_migrants_boats %>%
 
 | month_short | month_long | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2024 | 2025 | 2026 |
 |:------------|:-----------|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
-| Jan         | January    |    7 |   45 |   94 |  224 | 1339 | 1180 | 1335 | 1098 |   32 |
+| Jan         | January    |    7 |   45 |   94 |  224 | 1339 | 1180 | 1335 | 1098 |  203 |
 
 ## Save data
 
