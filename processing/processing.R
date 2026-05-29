@@ -28,6 +28,15 @@ path2repo <- here::here()
 path2input_data <- here::here("input_data")
 path2output_data <- here::here("output_data")
 
+date_last_update <- as.Date("2026-05-22")
+text_file_last_update <- format(x = date_last_update, format = "%e_%B_%Y") %>% str_squish()
+
+# Download and save data
+url_download <- str_glue("https://assets.publishing.service.gov.uk/media/6a106e9c0a1a96d9418d281c/{text_file_last_update}_Small_boats_-_time_series.ods")
+curl::curl_download(
+    url = url_download,
+    destfile = here::here(path2input_data, "data_small_boats_time_series.ods"))
+
 #' ## Intro
 #' 
 #' Data on migrants arriving in the UK in small boats is published weekly, 
