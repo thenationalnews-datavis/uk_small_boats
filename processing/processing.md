@@ -1,6 +1,6 @@
 # Data processing: Small boat activity in the English Channel
 
-July 10, 2026
+July 17, 2026
 
 by [Isaac Arroyo](https://github.com/isaacarroyov), Data Visualisation Journalist
 
@@ -13,7 +13,7 @@ path2repo <- here::here()
 path2input_data <- here::here("input_data")
 path2output_data <- here::here("output_data")
 
-date_last_update <- as.Date("2026-07-10")
+date_last_update <- as.Date("2026-07-17")
 text_file_last_update <- format(x = date_last_update, format = "%e_%B_%Y") %>% str_squish()
 
 # Download and save data
@@ -65,16 +65,16 @@ data_source <- readODS::read_ods(
 
 | full_date | migrants_arrived | boats_arrived | boats_arrived_involved_in_uncontrolled_landings | notes |
 |:---|---:|---:|:---|:---|
-| 2026-06-30 | 63 | 1 | 0 | NA |
-| 2026-07-01 | 0 | 0 | 0 | NA |
-| 2026-07-02 | 0 | 0 | 0 | NA |
-| 2026-07-03 | 0 | 0 | 0 | NA |
-| 2026-07-04 | 0 | 0 | 0 | NA |
-| 2026-07-05 | 0 | 0 | 0 | NA |
-| 2026-07-06 | 0 | 0 | 0 | NA |
 | 2026-07-07 | 0 | 0 | 0 | NA |
 | 2026-07-08 | 249 | 4 | 0 | NA |
 | 2026-07-09 | 81 | 1 | 0 | NA |
+| 2026-07-10 | 255 | 3 | 0 | NA |
+| 2026-07-11 | 0 | 0 | 0 | NA |
+| 2026-07-12 | 0 | 0 | 0 | NA |
+| 2026-07-13 | 0 | 0 | 0 | NA |
+| 2026-07-14 | 0 | 0 | 0 | NA |
+| 2026-07-15 | 0 | 0 | 0 | NA |
+| 2026-07-16 | 0 | 0 | 0 | NA |
 
 > \[!NOTE\]
 >
@@ -132,16 +132,16 @@ db_daily_migrants_boats <- data_source %>%
 
 | full_date | date_label | n_year | n_month | n_day | migrants_arrived | boats_arrived | migrants_per_boat | cumulative_migrants_arrived | cumulative_boats_arrived | migrants_per_boat_round |
 |:---|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 2026-06-30 | June 30, 2026 | 2026 | 6 | 30 | 63 | 1 | 63.00 | 11884 | 182 | 63 |
-| 2026-07-01 | July 1, 2026 | 2026 | 7 | 1 | NA | NA | NA | 11884 | 182 | NA |
-| 2026-07-02 | July 2, 2026 | 2026 | 7 | 2 | NA | NA | NA | 11884 | 182 | NA |
-| 2026-07-03 | July 3, 2026 | 2026 | 7 | 3 | NA | NA | NA | 11884 | 182 | NA |
-| 2026-07-04 | July 4, 2026 | 2026 | 7 | 4 | NA | NA | NA | 11884 | 182 | NA |
-| 2026-07-05 | July 5, 2026 | 2026 | 7 | 5 | NA | NA | NA | 11884 | 182 | NA |
-| 2026-07-06 | July 6, 2026 | 2026 | 7 | 6 | NA | NA | NA | 11884 | 182 | NA |
 | 2026-07-07 | July 7, 2026 | 2026 | 7 | 7 | NA | NA | NA | 11884 | 182 | NA |
 | 2026-07-08 | July 8, 2026 | 2026 | 7 | 8 | 249 | 4 | 62.25 | 12133 | 186 | 62 |
 | 2026-07-09 | July 9, 2026 | 2026 | 7 | 9 | 81 | 1 | 81.00 | 12214 | 187 | 81 |
+| 2026-07-10 | July 10, 2026 | 2026 | 7 | 10 | 255 | 3 | 85.00 | 12469 | 190 | 85 |
+| 2026-07-11 | July 11, 2026 | 2026 | 7 | 11 | NA | NA | NA | 12469 | 190 | NA |
+| 2026-07-12 | July 12, 2026 | 2026 | 7 | 12 | NA | NA | NA | 12469 | 190 | NA |
+| 2026-07-13 | July 13, 2026 | 2026 | 7 | 13 | NA | NA | NA | 12469 | 190 | NA |
+| 2026-07-14 | July 14, 2026 | 2026 | 7 | 14 | NA | NA | NA | 12469 | 190 | NA |
+| 2026-07-15 | July 15, 2026 | 2026 | 7 | 15 | NA | NA | NA | 12469 | 190 | NA |
+| 2026-07-16 | July 16, 2026 | 2026 | 7 | 16 | NA | NA | NA | 12469 | 190 | NA |
 
 ### Weekly migrant and boat arrivals
 
@@ -203,7 +203,6 @@ db_weekly_migrants_boats <- db_daily_migrants_boats %>%
 
 | n_year | n_week | migrants_arrived | boats_arrived | cumulative_migrants_arrived | cumulative_boats_arrived | migrants_per_boat | migrants_per_boat_round |
 |---:|---:|---:|---:|---:|---:|---:|---:|
-| 2026 | 19 | 266 | 4 | 7576 | 119 | 66.50000 | 66 |
 | 2026 | 20 | NA | NA | 7576 | 119 | NA | NA |
 | 2026 | 21 | 1202 | 17 | 8778 | 136 | 70.70588 | 71 |
 | 2026 | 22 | 364 | 6 | 9142 | 142 | 60.66667 | 61 |
@@ -212,7 +211,8 @@ db_weekly_migrants_boats <- db_daily_migrants_boats %>%
 | 2026 | 25 | 1636 | 24 | 11488 | 177 | 68.16667 | 68 |
 | 2026 | 26 | 396 | 5 | 11884 | 182 | 79.20000 | 79 |
 | 2026 | 27 | 249 | 4 | 12133 | 186 | 62.25000 | 62 |
-| 2026 | 28 | 81 | 1 | 12214 | 187 | 81.00000 | 81 |
+| 2026 | 28 | 336 | 4 | 12469 | 190 | 84.00000 | 84 |
+| 2026 | 29 | NA | NA | 12469 | 190 | NA | NA |
 
 ### Monthly migrant and boat arrivals
 
@@ -267,7 +267,7 @@ db_monthly_migrants_boats <- db_daily_migrants_boats %>%
 | 2026-04-01 | April 2026 | 2026 | 4 | 1975 | 30 | 65.83333 | 6416 | 100 | 66 |
 | 2026-05-01 | May 2026 | 2026 | 5 | 2726 | 42 | 64.90476 | 9142 | 142 | 65 |
 | 2026-06-01 | June 2026 | 2026 | 6 | 2742 | 40 | 68.55000 | 11884 | 182 | 69 |
-| 2026-07-01 | July 2026 | 2026 | 7 | 330 | 5 | 66.00000 | 12214 | 187 | 66 |
+| 2026-07-01 | July 2026 | 2026 | 7 | 585 | 8 | 73.12500 | 12469 | 190 | 73 |
 
 ### Yearly migrant and boat arrivals
 
@@ -296,7 +296,7 @@ db_yearly_migrants_boats <- db_daily_migrants_boats %>%
 | 2023 | 29437 | 602 | 48.898671 | 49 |
 | 2024 | 36816 | 695 | 52.972662 | 53 |
 | 2025 | 41472 | 672 | 61.714286 | 62 |
-| 2026 | 12214 | 187 | 65.315508 | 65 |
+| 2026 | 12469 | 190 | 65.626316 | 66 |
 
 ## Wide format
 
@@ -312,7 +312,6 @@ wide_weekly_cumulative_migrants <- db_weekly_migrants_boats %>%
 
 | n_week | 2018 | 2019 | 2020 | 2021 |  2022 |  2023 |  2024 |  2025 |  2026 |
 |-------:|-----:|-----:|-----:|-----:|------:|------:|------:|------:|------:|
-|     19 |    7 |  348 | 1348 | 2948 |  7801 |  6844 |  9455 | 12699 |  7576 |
 |     20 |    7 |  400 | 1492 | 3141 |  8840 |  7297 |  9874 | 12748 |  7576 |
 |     21 |    7 |  429 | 1706 | 3172 |  9326 |  7558 | 10448 | 13617 |  8778 |
 |     22 |    7 |  503 | 1766 | 4229 |  9984 |  7610 | 10448 | 14812 |  9142 |
@@ -321,7 +320,8 @@ wide_weekly_cumulative_migrants <- db_weekly_migrants_boats %>%
 |     25 |   11 |  592 | 2284 | 5346 | 12206 | 11115 | 12901 | 18400 | 11488 |
 |     26 |   11 |  592 | 2493 | 5989 | 12747 | 11433 | 13489 | 20422 | 11884 |
 |     27 |   11 |  638 | 2503 | 6665 | 13172 | 12503 | 13574 | 21117 | 12133 |
-|     28 |   11 |  656 | 2712 | 7499 | 14554 | 13200 | 14332 | 22504 | 12214 |
+|     28 |   11 |  656 | 2712 | 7499 | 14554 | 13200 | 14332 | 22504 | 12469 |
+|     29 |   11 |  730 | 3176 | 8851 | 15314 | 14534 | 15832 | 23534 | 12469 |
 
 **Monhtly cumulative migrant arrivals**
 
@@ -348,7 +348,7 @@ wide_monthly_cumulative_migrants <- db_monthly_migrants_boats %>%
 | Apr         | April      |    7 |  279 | 1023 | 2113 |  6691 |  5946 |  7567 | 11074 |  6416 |
 | May         | May        |    7 |  429 | 1766 | 3740 |  9607 |  7610 | 10448 | 14812 |  9142 |
 | Jun         | June       |   11 |  592 | 2493 | 5917 | 12747 | 11433 | 13489 | 19982 | 11884 |
-| Jul         | July       |   11 |  787 | 3604 | 9429 | 16434 | 14732 | 16903 | 25436 | 12214 |
+| Jul         | July       |   11 |  787 | 3604 | 9429 | 16434 | 14732 | 16903 | 25436 | 12469 |
 
 ## Save data
 
