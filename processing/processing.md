@@ -13,7 +13,12 @@ path2repo <- here::here()
 path2input_data <- here::here("input_data")
 path2output_data <- here::here("output_data")
 
-date_last_update <- as.Date("2026-08-14")
+today <- Sys.Date()
+day_of_week <- as.POSIXlt(today)$wday
+# POSIXlt wday: Sun=0, Mon=1, ..., Fri=5, Sat=6
+# Use the current Friday if today is Friday => otherwise use the most recent Friday.
+days_since_last_friday <- (day_of_week + 2) %% 7
+date_last_update <- today - days_since_last_friday
 text_file_last_update <- format(x = date_last_update, format = "%e_%B_%Y") %>% str_squish()
 
 # Download and save data
